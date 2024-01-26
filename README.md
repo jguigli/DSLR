@@ -3,7 +3,7 @@ Data Science Logistic Regression
 
 Useful links :  
 [SUBJECT](https://cdn.intra.42.fr/pdf/pdf/66152/en.subject.pdf)  
-[]()  
+[PANDAS GETTINT STARTED](https://pandas.pydata.org/docs/getting_started/index.html#getting-started)  
 []()  
 
 It is highly recommended to perform the steps in following order.  
