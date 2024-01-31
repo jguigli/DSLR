@@ -3,8 +3,15 @@ Data Science Logistic Regression
 
 Useful links :  
 [SUBJECT](https://cdn.intra.42.fr/pdf/pdf/66152/en.subject.pdf)  
-[PANDAS GETTINT STARTED](https://pandas.pydata.org/docs/getting_started/index.html#getting-started)  
-[]()  
+[PANDAS GETTING STARTED](https://pandas.pydata.org/docs/getting_started/index.html#getting-started)  
+[Multi-classifier Logistic Regression](https://www.cs.rice.edu/~as143/COMP642_Spring22/Scribes/Lect5)  
+[OneVSOne / OneVSRest](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)  
+[Multi-classifier OneVSOne / OneVSRest](https://towardsdatascience.com/multi-class-classification-one-vs-all-one-vs-one-94daed32a87b)  
+[Tutorial Logistic Regression OnevsAll](https://medium.com/analytics-vidhya/logistic-regression-from-scratch-multi-classification-with-onevsall-d5c2acf0c37c)  
+
+Links for bonus :
+[Wiki stochastic gradient descent](https://fr.wikipedia.org/wiki/Algorithme_du_gradient_stochastique)  
+[Explication stochastic gradient descent](https://towardsdatascience.com/stochastic-gradient-descent-clearly-explained-53d239905d31)  
 
 It is highly recommended to perform the steps in following order.  
 
