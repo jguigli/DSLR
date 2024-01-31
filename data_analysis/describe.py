@@ -7,26 +7,44 @@ def load(path: str) -> pd.DataFrame:
     df = pd.read_csv(path)
     return df
 
+def calcul_fields(numerical_data) -> pd.DataFrame():
+    """"""
+    try:
+        i = 0
+        describe_dataframe = pd.DataFrame(index=['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max', 'var', 'median'])
+
+        for key, value in numerical_data.items():
+            count = value.count()
+            mean = value.mean()
+            var = value.var()
+            std = var ** 0.5
+            min = value.min()
+            quartile25 = value.quantile(0.25)
+            quartile50 = value.quantile(0.5)
+            quartile75 = value.quantile(0.75)
+            max = value.max()
+            median = value.median()
+
+            fields = [count, mean, std, min, quartile25, quartile50, quartile75, max, var, median]
+            fields_formatted = [f'{name:.6f}' for name in fields]
+
+            describe_dataframe.insert(i, key, fields_formatted)
+            i += 1
+        return describe_dataframe
+    except Exception as e:
+        print(f"Error handling: {e}")
+
 def describe():    
     try:
-        data = load("../data/data.csv")
-        data_mileage = data['km'].astype('int')
-        data_price = data['price'].astype('int')
-        mileage = np.array(data_mileage)
-        price = np.array(data_price)
-		
-        thetas = load("../data/thetas.csv")
-        theta0 = float(thetas['theta0'].iloc[0])
-        theta1 = float(thetas['theta1'].iloc[0])
+        data = load("../data_sets/dataset_train.csv")
+        numerical_data = {}
 
-        predicted_price = estimate_price(theta0, theta1, mileage)
-
-        plt.scatter(mileage, price)
-        plt.plot([min(mileage), max(mileage)], [max(predicted_price), min(predicted_price)], color='red')
-        plt.title('Linear regression')
-        plt.xlabel('Mileage')
-        plt.ylabel('Price')
-        plt.show()
+        for name, column in data.items():
+            if (column.dtypes == 'float64' or column.dtypes == 'int64'):
+                numerical_data[name] = column
+        # print(data.describe())
+        describe = calcul_fields(numerical_data)
+        print(describe)
     except Exception as e:
         print(f"Error handling: {str(e)}")
         return

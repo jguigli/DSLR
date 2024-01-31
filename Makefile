@@ -1,4 +1,4 @@
-all: train predict accuracy graph
+all: describe histogram scatter plot train predict
 
 describe:
 	@python3 ./data_analysis/training_model.py

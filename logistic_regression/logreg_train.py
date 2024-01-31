@@ -17,8 +17,6 @@ def min_max_scaling(data):
     return scaled_data
 
 def adjust_coefficients(theta0_normalized, theta1_normalized, price, mileage):
-    min_vals = np.min(price)
-    max_vals = np.max(price)
     theta0 = theta0_normalized * np.max(price)
     theta1 = theta1_normalized * (np.max(price) / np.max(mileage))
     return theta0, theta1

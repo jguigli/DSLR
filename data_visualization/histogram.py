@@ -1,37 +1,40 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+import math
 
 def load(path: str) -> pd.DataFrame:
     """Read a CSV datasheet and return a DataFrame."""
     df = pd.read_csv(path)
     return df
 
-def graph_data():    
+def histogram_data():
     try:
-        data = load("../data/data.csv")
-        data_mileage = data['km'].astype('int')
-        data_price = data['price'].astype('int')
-        mileage = np.array(data_mileage)
-        price = np.array(data_price)
-		
-        thetas = load("../data/thetas.csv")
-        theta0 = float(thetas['theta0'].iloc[0])
-        theta1 = float(thetas['theta1'].iloc[0])
+        data = load("../data_sets/dataset_train.csv")
+        
+        # Arithmancy
+        # or 
+        # Care of Magical Creatures
 
-        predicted_price = estimate_price(theta0, theta1, mileage)
+        N = data['Arithmancy'].size
+        bins = int(1 + math.log2(N))
+        colors = ['red', 'green', 'blue', 'yellow']
+        hogwart_house = ['Gryffindor', 'Slytherin', 'Ravenclaw', 'Hufflepuff']
 
-        plt.scatter(mileage, price)
-        plt.plot([min(mileage), max(mileage)], [max(predicted_price), min(predicted_price)], color='red')
-        plt.title('Linear regression')
-        plt.xlabel('Mileage')
-        plt.ylabel('Price')
+        for color, house in zip(colors, hogwart_house):
+            data_course = data[data['Hogwarts House'] == house]['Arithmancy']
+            plt.hist(data_course, bins, density=True, histtype='bar', color=color, label=house, alpha=0.7)
+
+        plt.title('Which Hogwarts course has a homogeneous score distribution between all four houses?')
+        plt.xlabel('Arithmancy')
+        plt.ylabel('Density')
         plt.show()
     except Exception as e:
         print(f"Error handling: {str(e)}")
         return
 
 def main():
-    graph_data()
+    histogram_data()
 
 if __name__ == "__main__":
     main()
