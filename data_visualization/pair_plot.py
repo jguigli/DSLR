@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn
 import numpy as np
 import pandas as pd
-matplotlib.use('TkAgg')
+# matplotlib.use('TkAgg')
 
 def load(path: str) -> pd.DataFrame:
     """Read a CSV datasheet and return a DataFrame."""
@@ -12,7 +12,7 @@ def load(path: str) -> pd.DataFrame:
 
 def pair_data():    
     try:
-        data = load("../data_sets/dataset_train.csv")
+        data = load("../data_sets/dataset_train.csv", index=False)
         seaborn.pairplot(data, hue ='Hogwarts House')
         plt.title('What features are you going to use for your logistic regression?')
         plt.show()

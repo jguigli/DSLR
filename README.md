@@ -91,3 +91,7 @@ Your answers will be evaluated using accuracy score of the `Scikit-Learn` librar
 Professor McGonagall agrees that your algorithm is comparable to the Sorting Hat only if it has a
 minimum precision of 98%.
 It will also be important to be able to explain the functioning of the used machine learning algorithms.
+
+## REMINDER
+
+- Valeur pas tout a fait egal pour describe.py

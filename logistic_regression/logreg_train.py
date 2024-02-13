@@ -21,14 +21,13 @@ def adjust_coefficients(theta0_normalized, theta1_normalized, price, mileage):
     theta1 = theta1_normalized * (np.max(price) / np.max(mileage))
     return theta0, theta1
 
-def estimate_price(theta0, theta1, mileage):
-    return theta0 + theta1 * mileage
+def sigmoid_function(z):
+    return 1 / (1 + np.exp(-z))
 
 def gradient_descent(mileage: np.ndarray, price: np.ndarray):
     m = float(len(mileage))
     theta0, theta1 = 0, 0
     learning_rate = 0.1
-    costs = []
     i = 0
 
     while 1:
@@ -54,7 +53,7 @@ def gradient_descent(mileage: np.ndarray, price: np.ndarray):
 
 def training_model():
     try:
-        data = load("../data/data.csv")
+        data = load("../data_sets/dataset_train.csv")
 
         data_mileage = data['km'].astype('int')
         data_price = data['price'].astype('int')

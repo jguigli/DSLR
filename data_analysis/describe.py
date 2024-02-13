@@ -1,31 +1,69 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import math
 
 def load(path: str) -> pd.DataFrame:
     """Read a CSV datasheet and return a DataFrame."""
     df = pd.read_csv(path)
     return df
 
+def max(data):
+    max = data[0]
+    for value in data:
+        if value > max:
+            max = value
+    return max
+
+def min(data):
+    min = data[0]
+    for value in data:
+        if value < min:
+            min = value
+    return min
+
+def quantile(data, p):
+    data = sorted(data)
+    position = (len(data) - 1) * p
+    floor = np.floor(position)
+    ceil = np.ceil(position)
+
+    if floor == ceil:
+        return data[int(position)]
+
+    # Linear interpolation
+    d0 = data[int(floor)] * (ceil - position)
+    d1 = data[int(ceil)] * (position - floor)
+    return d0 + d1
+
 def calcul_fields(numerical_data) -> pd.DataFrame():
     """"""
     try:
         i = 0
-        describe_dataframe = pd.DataFrame(index=['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max', 'var', 'median'])
+        describe_dataframe = pd.DataFrame(index=['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'])
 
         for key, value in numerical_data.items():
-            count = value.count()
-            mean = value.mean()
-            var = value.var()
-            std = var ** 0.5
-            min = value.min()
-            quartile25 = value.quantile(0.25)
-            quartile50 = value.quantile(0.5)
-            quartile75 = value.quantile(0.75)
-            max = value.max()
-            median = value.median()
+            value_without_nan = [element for element in value if not math.isnan(element)]
+            count = len(value_without_nan)
 
-            fields = [count, mean, std, min, quartile25, quartile50, quartile75, max, var, median]
+            mean = np.sum(value_without_nan) / count
+
+            s_diff = [(element - mean) ** 2 for element in value_without_nan]
+            var = sum(s_diff) / count
+            std = var ** 0.5
+
+            mini = min(value_without_nan)
+
+            quartile1 = quantile(value_without_nan, 0.25)
+            quartile2 = quantile(value_without_nan, 0.5)
+            quartile3 = quantile(value_without_nan, 0.75)
+
+            maxi = max(value_without_nan)
+
+            median = sorted(value_without_nan)[count // 2]
+
+            # Rajouter files bonus : var, median, ...
+            fields = [count, mean, std, mini, quartile1, quartile2, quartile3, maxi]
             fields_formatted = [f'{name:.6f}' for name in fields]
 
             describe_dataframe.insert(i, key, fields_formatted)
@@ -42,7 +80,7 @@ def describe():
         for name, column in data.items():
             if (column.dtypes == 'float64' or column.dtypes == 'int64'):
                 numerical_data[name] = column
-        # print(data.describe())
+        print(data.describe())
         describe = calcul_fields(numerical_data)
         print(describe)
     except Exception as e:
