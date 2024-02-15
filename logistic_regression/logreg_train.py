@@ -1,78 +1,64 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from utils import sigmoid_function, standard_scaler, load, export_thetas
 
-def load(path: str) -> pd.DataFrame:
-    """Read a CSV datasheet and return a DataFrame."""
-    df = pd.read_csv(path)
-    return df
+def compare_thetas(theta, old_theta):
+    for i in range(len(theta)):
+        if old_theta[i] != theta[i]:
+            return False
+    return True
 
-def export_thetas(theta0, theta1):
-    df = pd.DataFrame({"theta0": [theta0],"theta1": [theta1]})
-    df.to_csv("../data/thetas.csv", index=False)
-    print(f"Exporting file : theta0 and theta1 has been saved to /data/thetas.csv\n")
+def gradient_descent(X, y):
+    m = len(y)
+    learning_rate = 0.01
+    thetas = []
+    costs = []
+    # Rajout d'une colonne pour le biais
+    X = np.insert(X, 0, 1, axis=1)
 
-def min_max_scaling(data):
-    scaled_data = (data / np.max(data))
-    return scaled_data
+    for house in np.unique(y):
+        # Mise a jour des etiquettes des donnees y correpondantes par 1 et 0 pour ceux qui ne sont pas concernees
+        y_current = np.where(y == house, 1, 0)
+        # Creation d'un vecteur theta a l'echelle du nombres de colonnes des features
+        theta = np.zeros(X.shape[1])
+        cost = []
+        for _ in range(30000):
+            old_theta = theta
+            z = X.dot(theta)
+            h = sigmoid_function(z)
+            
+            gradient_value = 1 / m * np.dot(X.T, (h - y_current))
+            theta -= learning_rate * gradient_value
 
-def adjust_coefficients(theta0_normalized, theta1_normalized, price, mileage):
-    theta0 = theta0_normalized * np.max(price)
-    theta1 = theta1_normalized * (np.max(price) / np.max(mileage))
-    return theta0, theta1
+            if (compare_thetas(theta, old_theta)):
+                break
+        thetas.append((theta, house))
+    return thetas
 
-def sigmoid_function(z):
-    return 1 / (1 + np.exp(-z))
-
-def gradient_descent(mileage: np.ndarray, price: np.ndarray):
-    m = float(len(mileage))
-    theta0, theta1 = 0, 0
-    learning_rate = 0.1
-    i = 0
-
-    while 1:
-        old_theta0 = theta0
-        old_theta1 = theta1
-
-        predicted_price = estimate_price(theta0, theta1, mileage)
-        diff_price = predicted_price - price
-
-        d_theta0 = (1 / m) * np.sum(diff_price)
-        d_theta1 = (1 / m) * np.sum(diff_price * mileage)
-
-        theta0 -= learning_rate * d_theta0
-        theta1 -= learning_rate * d_theta1
-
-        if (theta0 == old_theta0 and theta1 == old_theta1):
-            print(f"The linear regression has finished.\nNumber of iterations : {i}\n")
-            break
-        i += 1
-
-    return theta0, theta1
-
-
-def training_model():
+def train_model():
     try:
         data = load("../data_sets/dataset_train.csv")
+        y = data['Hogwarts House'].values
+        X = data.drop(['Index','Hogwarts House','First Name','Last Name','Birthday','Best Hand','Arithmancy','Astronomy','Herbology','Defense Against the Dark Arts','History of Magic','Transfiguration','Potions','Care of Magical Creatures','Charms','Flying'],axis=1)
+        # Supprime les valeurs NaN
+        X = X.dropna()
+        # Met a jour le nombres d'index de y pour correspondre a X
+        y = y[X.index]
 
-        data_mileage = data['km'].astype('int')
-        data_price = data['price'].astype('int')
-        mileage = np.array(data_mileage)
-        price = np.array(data_price)
-        mileage_normalized = min_max_scaling(mileage)
-        price_normalized = min_max_scaling(price)
-
-        theta0, theta1 = gradient_descent(mileage_normalized, price_normalized)
-        theta0, theta1 = adjust_coefficients(theta0, theta1, price, mileage)
-        print(f"- theta0 : {theta0}")
-        print(f"- theta1 : {theta1}")
-        export_thetas(theta0, theta1)
+        X = X.values
+        # print(X.shape)
+        # print(X)
+        # print(y.shape)
+        X = standard_scaler(X)
+        thetas = gradient_descent(X, y)
+        export_thetas(thetas)
     except Exception as e:
         print(f"Error handling: {str(e)}")
         return
 
 def main():
-    training_model()
+    train_model()
 
 if __name__ == "__main__":
     main()

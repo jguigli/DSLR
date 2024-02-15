@@ -94,4 +94,16 @@ It will also be important to be able to explain the functioning of the used mach
 
 ## REMINDER
 
+OK :
 - Valeur pas tout a fait egal pour describe.py
+- Faire la partie prediction
+- Exporter les thetas dans un csv
+
+KO :
+- Describe.py -> rajouter .dropna() ?
+- Rajouter les 4 maisons dans le scatter plot avec les couleurs
+- Exposer les bonnes features pour la logreg
+- Tester le performance du modele
+- Valeur NaN remove, ca pose probleme pour le bon nombre de lignes predites dans train et/ou predict
+- Rajouter la fonction de cout et la plot
+- Faire les bonus
