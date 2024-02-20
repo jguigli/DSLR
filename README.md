@@ -8,10 +8,14 @@ Useful links :
 [OneVSOne / OneVSRest](https://machinelearningmastery.com/one-vs-rest-and-one-vs-one-for-multi-class-classification/)  
 [Multi-classifier OneVSOne / OneVSRest](https://towardsdatascience.com/multi-class-classification-one-vs-all-one-vs-one-94daed32a87b)  
 [Tutorial Logistic Regression OnevsAll](https://medium.com/analytics-vidhya/logistic-regression-from-scratch-multi-classification-with-onevsall-d5c2acf0c37c)  
+[Feature Importance for Logistic Regression](https://forecastegy.com/posts/feature-importance-in-logistic-regression/)  
+[Pairplot Interpretation](https://medium.com/analytics-vidhya/pairplot-visualization-16325cd725e6)  
 
 Links for bonus :
 [Wiki stochastic gradient descent](https://fr.wikipedia.org/wiki/Algorithme_du_gradient_stochastique)  
 [Explication stochastic gradient descent](https://towardsdatascience.com/stochastic-gradient-descent-clearly-explained-53d239905d31)  
+[Difference between stochastic gradient, Batch, Mini Batch](https://towardsdatascience.com/batch-mini-batch-stochastic-gradient-descent-7a62ecba642a)  
+[Difference between gradient, stochastic and Mini Batch](https://www.baeldung.com/cs/gradient-stochastic-and-mini-batch)  
 
 It is highly recommended to perform the steps in following order.  
 
@@ -92,18 +96,41 @@ Professor McGonagall agrees that your algorithm is comparable to the Sorting Hat
 minimum precision of 98%.
 It will also be important to be able to explain the functioning of the used machine learning algorithms.
 
+## Features for logistic regression
+
+'Index', 'Hogwarts House', 'First Name', 'Last Name', 'Birthday', 'Best Hand', 'Arithmancy', 'Astronomy', 'Herbology', 'Defense Against the Dark Arts', 'Divination', 'Muggle Studies', 'Ancient Runes', 'History of Magic', 'Transfiguration', 'Potions', 'Care of Magical Creatures', 'Charms', 'Flying'
+
+Good :
+• Astronomy
+• Ancient Runes
+• Charms
+• Flying
+
+Maybe :
+• History of Magic (?)
+• Muggle studies (?)
+
+Bad :
+• Herbology
+• Defense against the dark
+
 ## REMINDER
 
 OK :
 - Valeur pas tout a fait egal pour describe.py
 - Faire la partie prediction
 - Exporter les thetas dans un csv
+- Describe.py -> rajouter .dropna() ?
+- Valeur NaN remove, ca pose probleme pour le bon nombre de lignes predites dans train et/ou predict (rajout de fillna(0))
+- Premiere ligne en trop dans house.csv
 
 KO :
-- Describe.py -> rajouter .dropna() ?
-- Rajouter les 4 maisons dans le scatter plot avec les couleurs
+- Describe.py -> Diff sur std
+
+- Scatter_plot.py -> Rajouter les 4 maisons dans le scatter plot avec les couleurs
+
 - Exposer les bonnes features pour la logreg
 - Tester le performance du modele
-- Valeur NaN remove, ca pose probleme pour le bon nombre de lignes predites dans train et/ou predict
 - Rajouter la fonction de cout et la plot
+- Voir ce que je fais avec la fonction compare_thetas()
 - Faire les bonus

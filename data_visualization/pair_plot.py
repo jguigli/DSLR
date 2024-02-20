@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn
 import numpy as np
 import pandas as pd
-# matplotlib.use('TkAgg')
+matplotlib.use('TkAgg')
 
 def load(path: str) -> pd.DataFrame:
     """Read a CSV datasheet and return a DataFrame."""

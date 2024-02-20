@@ -43,24 +43,24 @@ def calcul_fields(numerical_data) -> pd.DataFrame():
         describe_dataframe = pd.DataFrame(index=['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'])
 
         for key, value in numerical_data.items():
-            value_without_nan = [element for element in value if not math.isnan(element)]
-            count = len(value_without_nan)
+            value_zero_nan = value.dropna()
+            count = len(value_zero_nan)
 
-            mean = np.sum(value_without_nan) / count
+            mean = np.sum(value_zero_nan) / count
 
-            s_diff = [(element - mean) ** 2 for element in value_without_nan]
+            s_diff = [(element - mean) ** 2 for element in value_zero_nan]
             var = sum(s_diff) / count
             std = var ** 0.5
 
-            mini = min(value_without_nan)
+            mini = min(value_zero_nan)
 
-            quartile1 = quantile(value_without_nan, 0.25)
-            quartile2 = quantile(value_without_nan, 0.5)
-            quartile3 = quantile(value_without_nan, 0.75)
+            quartile1 = quantile(value_zero_nan, 0.25)
+            quartile2 = quantile(value_zero_nan, 0.5)
+            quartile3 = quantile(value_zero_nan, 0.75)
 
-            maxi = max(value_without_nan)
+            maxi = max(value_zero_nan)
 
-            median = sorted(value_without_nan)[count // 2]
+            median = sorted(value_zero_nan)[count // 2]
 
             # Rajouter files bonus : var, median, ...
             fields = [count, mean, std, mini, quartile1, quartile2, quartile3, maxi]

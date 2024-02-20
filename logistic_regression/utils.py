@@ -21,7 +21,13 @@ def export_thetas(thetas):
         thetas_dict[house] = values
     df = pd.DataFrame(thetas_dict)
     df.to_csv("./thetas.csv", index=False)
-    print(f"Exporting file : thetas has been saved to /logistic_regression")
+    print(f"Exporting file : thetas has been saved to /logistic_regression/thetas.csv")
+
+def export_predict_house(class_predicted):
+    df = pd.DataFrame(class_predicted, columns=['Hogwarts House'])
+    df.to_csv("./houses.csv", index_label='Index')
+    print(f"Exporting file : houses has been saved to /logistic_regression/houses.csv")
+    return
 
 def score(Logreg,X, y): 
     # This function compares the predictd label with the actual label to find the model performance

@@ -1,16 +1,16 @@
-all: describe histogram scatter plot train predict
+all: train predict
 
 describe:
-	@python3 ./data_analysis/training_model.py
+	@cd ./data_analysis && python3 describe.py
 histogram:
-	@python3 ./data_visualization/predict.py
+	@cd ./data_visualization && python3 histogram.py
 scatter:
-	@python3 ./data_visualization/graph.py
-plot:
-	@python3 ./data_visualization/algorithm_accuracy.py
+	@cd ./data_visualization && python3 scatter_plot.py
+pair:
+	@cd ./data_visualization && python3 pair_plot.py
 train:
-	@python3 ./logistic_regression/algorithm_accuracy.py
+	@cd ./logistic_regression && python3 logreg_train.py
 predict:
-	@python3 ./logistic_regression/algorithm_accuracy.py
+	@cd ./logistic_regression && python3 logreg_predict.py
 clean:
-	@rm ../data/thetas.csv
+	@cd ./logistic_regression && rm thetas.csv houses.csv

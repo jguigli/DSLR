@@ -14,6 +14,7 @@ def gradient_descent(X, y):
     learning_rate = 0.01
     thetas = []
     costs = []
+
     # Rajout d'une colonne pour le biais
     X = np.insert(X, 0, 1, axis=1)
 
@@ -40,17 +41,12 @@ def train_model():
     try:
         data = load("../data_sets/dataset_train.csv")
         y = data['Hogwarts House'].values
-        X = data.drop(['Index','Hogwarts House','First Name','Last Name','Birthday','Best Hand','Arithmancy','Astronomy','Herbology','Defense Against the Dark Arts','History of Magic','Transfiguration','Potions','Care of Magical Creatures','Charms','Flying'],axis=1)
-        # Supprime les valeurs NaN
-        X = X.dropna()
-        # Met a jour le nombres d'index de y pour correspondre a X
-        y = y[X.index]
-
-        X = X.values
-        # print(X.shape)
-        # print(X)
-        # print(y.shape)
+        X = data.drop(['Index', 'Hogwarts House', 'First Name', 'Last Name', 'Birthday', 'Best Hand', 'Arithmancy', 'Herbology', 'Defense Against the Dark Arts', 'Divination', 'Muggle Studies', 'History of Magic', 'Transfiguration', 'Potions', 'Care of Magical Creatures'],axis=1)
+        
+        # Met les valeurs NaN a 0
+        X = X.fillna(0).values
         X = standard_scaler(X)
+
         thetas = gradient_descent(X, y)
         export_thetas(thetas)
     except Exception as e:
