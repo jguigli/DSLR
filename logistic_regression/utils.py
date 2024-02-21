@@ -28,8 +28,3 @@ def export_predict_house(class_predicted):
     df.to_csv("./houses.csv", index_label='Index')
     print(f"Exporting file : houses has been saved to /logistic_regression/houses.csv")
     return
-
-def score(Logreg,X, y): 
-    # This function compares the predictd label with the actual label to find the model performance
-    score = sum(Logreg.predict(X) == y) / len(y)
-    return score

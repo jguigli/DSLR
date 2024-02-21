@@ -41,7 +41,7 @@ def train_model():
     try:
         data = load("../data_sets/dataset_train.csv")
         y = data['Hogwarts House'].values
-        X = data.drop(['Index', 'Hogwarts House', 'First Name', 'Last Name', 'Birthday', 'Best Hand', 'Arithmancy', 'Herbology', 'Defense Against the Dark Arts', 'Divination', 'Muggle Studies', 'History of Magic', 'Transfiguration', 'Potions', 'Care of Magical Creatures'],axis=1)
+        X = data.drop(['Index', 'Hogwarts House', 'First Name', 'Last Name', 'Birthday', 'Best Hand', 'Arithmancy', 'Herbology', 'Defense Against the Dark Arts', 'Divination', 'Transfiguration', 'Potions', 'Care of Magical Creatures'],axis=1)
         
         # Met les valeurs NaN a 0
         X = X.fillna(0).values

@@ -114,6 +114,14 @@ Bad :
 • Herbology
 • Defense against the dark
 
+Astronomy
+Defense Against the Dark Arts
+Arithmancy
+Care of Magical Creatures
+Potions
+
+'Index', 'Hogwarts House', 'First Name', 'Last Name', 'Birthday', 'Best Hand', 'Arithmancy', 'Astronomy', 'Defense Against the Dark Arts', 'Potions', 'Care of Magical Creatures'
+
 ## REMINDER
 
 OK :
