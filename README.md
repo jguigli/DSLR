@@ -122,6 +122,10 @@ Potions
 
 'Index', 'Hogwarts House', 'First Name', 'Last Name', 'Birthday', 'Best Hand', 'Arithmancy', 'Astronomy', 'Defense Against the Dark Arts', 'Potions', 'Care of Magical Creatures'
 
+SCORE 70% :
+
+    'Index', 'Hogwarts House', 'First Name', 'Last Name','Birthday', 'Best Hand', 'Arithmancy', 'Defense Against the Dark Arts', 'Divination', 'Transfiguration', 'Potions','Care of Magical Creatures'
+
 ## REMINDER
 
 OK :

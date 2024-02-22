@@ -3,15 +3,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from utils import sigmoid_function, standard_scaler, load, export_thetas
 
-def compare_thetas(theta, old_theta):
-    for i in range(len(theta)):
-        if old_theta[i] != theta[i]:
-            return False
-    return True
 
 def gradient_descent(X, y):
     m = len(y)
-    learning_rate = 0.01
+    learning_rate = 1
     thetas = []
     costs = []
 
@@ -24,16 +19,12 @@ def gradient_descent(X, y):
         # Creation d'un vecteur theta a l'echelle du nombres de colonnes des features
         theta = np.zeros(X.shape[1])
         cost = []
-        for _ in range(30000):
-            old_theta = theta
+        for _ in range(50000):
             z = X.dot(theta)
             h = sigmoid_function(z)
             
-            gradient_value = 1 / m * np.dot(X.T, (h - y_current))
+            gradient_value = 1 / m * np.dot((h - y_current), X)
             theta -= learning_rate * gradient_value
-
-            if (compare_thetas(theta, old_theta)):
-                break
         thetas.append((theta, house))
     return thetas
 
@@ -41,7 +32,7 @@ def train_model():
     try:
         data = load("../data_sets/dataset_train.csv")
         y = data['Hogwarts House'].values
-        X = data.drop(['Index', 'Hogwarts House', 'First Name', 'Last Name', 'Birthday', 'Best Hand', 'Arithmancy', 'Herbology', 'Defense Against the Dark Arts', 'Divination', 'Transfiguration', 'Potions', 'Care of Magical Creatures'],axis=1)
+        X = data.drop(['Index', 'Hogwarts House', 'First Name', 'Last Name', 'Birthday', 'Best Hand', 'Arithmancy', 'Defense Against the Dark Arts', 'Divination', 'Transfiguration', 'Potions', 'Care of Magical Creatures'], axis=1)
         
         # Met les valeurs NaN a 0
         X = X.fillna(0).values

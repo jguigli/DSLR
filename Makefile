@@ -12,5 +12,7 @@ train:
 	@cd ./logistic_regression && python3 logreg_train.py
 predict:
 	@cd ./logistic_regression && python3 logreg_predict.py
+score : train predict
+	@cd ./logistic_regression && python3 accuracy_score.py
 clean:
 	@cd ./logistic_regression && rm thetas.csv houses.csv
