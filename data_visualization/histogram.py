@@ -3,12 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import math
-# matplotlib.use('TkAgg')
-
-def load(path: str) -> pd.DataFrame:
-    """Read a CSV datasheet and return a DataFrame."""
-    df = pd.read_csv(path)
-    return df
+matplotlib.use('TkAgg')
+from logistic_regression.utils import load
 
 def histogram_data():
     try:
@@ -30,6 +26,7 @@ def histogram_data():
         plt.title('Which Hogwarts course has a homogeneous score distribution between all four houses?')
         plt.xlabel('Arithmancy')
         plt.ylabel('Density')
+        plt.legend()
         plt.show()
     except Exception as e:
         print(f"Error handling: {str(e)}")

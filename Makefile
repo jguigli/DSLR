@@ -9,10 +9,8 @@ scatter:
 pair:
 	@cd ./data_visualization && python3 pair_plot.py
 train:
-	@cd ./logistic_regression && python3 logreg_train.py
+	@cd ./logistic_regression && python3 logreg_train.py && python3 logreg_train_stochastic.py && python3 logreg_train_minibatch.py
 predict:
 	@cd ./logistic_regression && python3 logreg_predict.py
-score : train predict
-	@cd ./logistic_regression && python3 accuracy_score.py
 clean:
-	@cd ./logistic_regression && rm thetas.csv houses.csv
+	@cd ./data_sets && rm parameters* houses.csv

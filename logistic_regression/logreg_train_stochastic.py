@@ -21,16 +21,20 @@ def gradient_descent(X, y):
         parameter = np.zeros(X.shape[1])
         cost = []
         for _ in ft_tqdm(range(50000)):
-            z = X.dot(parameter)
+            index = np.random.randint(m)
+            x_rand = X[index]
+            y_rand = y_current[index]
+
+            z = x_rand.dot(parameter)
             h = sigmoid_function(z)
             
-            gradient_value = 1 / m * np.dot((h - y_current), X)
+            gradient_value = 1 / m * np.dot((h - y_rand), x_rand)
             parameter -= learning_rate * gradient_value
-            cost_value = -1 / m * np.sum(y_current * np.log(h) + (1 - y_current) * np.log(1 - h))
+            cost_value = -1 / m * np.sum(y_rand * np.log(h) + (1 - y_rand) * np.log(1 - h))
             cost.append(cost_value)
         parameters.append((parameter, house))
         costs.append((cost, house))
-        print(f"Batch Gradient Descent has finished for the {house} label\n")
+        print(f"Stochastic Gradient descent has finished for the {house} label\n")
     end = time.time()
     print(f"Training of the model carried out in : {(end - start):.1f} second(s)\n")
     return parameters, costs
@@ -38,7 +42,7 @@ def gradient_descent(X, y):
 def train_model():
     try:
         print("===> Training of the logistic regression model <===\n")
-        print("Algorithm : Batch Gradient Descent\n")
+        print("Algorithm : Stochastic Gradient Descent\n")
         data = load("../data_sets/dataset_train.csv")
         y = data['Hogwarts House'].values
         X = data.drop(['Index',
@@ -56,7 +60,7 @@ def train_model():
         X = standard_scaler(X)
 
         parameters, costs = gradient_descent(X, y)
-        export_thetas(parameters, "batch")
+        export_thetas(parameters, "stochastic")
         plot_cost(costs)
     except Exception as e:
         print(f"Error handling: {str(e)}")
