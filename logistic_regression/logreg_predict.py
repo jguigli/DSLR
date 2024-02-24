@@ -55,6 +55,8 @@ def predict():
         print("Accuracy of the logistic regression model with the given test dataset :")
         for parameter, type in all_parameters:
             y_predicted = sorting_hat(X, parameter)
+            if (type == "Batch"):
+                y_predicted_mandatory = y_predicted
             accuracy = accuracy_score(y_truth, y_predicted)
             error = sum(y_predicted != y_truth)
             print(f"- {type} Gradient Descent algorithm : {(100 * accuracy):.2f}% ({error} error(s) out of {len(y_truth)} instances))")
@@ -78,7 +80,7 @@ def predict():
 
         # Affichage des scores de precisions des modeles en fonction de l'algortihme avec des datasets aleatoires
         print("\nAccuracy of the logistic regression model with multiple random test datasets :")
-        print("\n- Batch Gradient Descent algorithm :")
+        print("- Batch Gradient Descent algorithm :")
         total_error = 0
         for i in range(10):
             X_train, X_test, y_train, y_test = train_test_split(X_data,y_data,test_size = 0.25)
@@ -98,7 +100,7 @@ def predict():
             total_error += error
             print(f"\t- Dataset test {i + 1} : {(100 * accuracy):.2f}% ({error} error(s) out of {len(y_test)} instances)")
         print(f"Average error rate : {round(total_error / 10)} error(s)")
-        print("\n- Mini Batch GD algorithm :")
+        print("\n- Mini-Batch Gradient Descent algorithm :")
         total_error = 0
         for i in range(10):
             X_train, X_test, y_train, y_test = train_test_split(X_data,y_data,test_size = 0.25)
@@ -110,7 +112,7 @@ def predict():
         print(f"Average error rate : {round(total_error / 10)} error(s)")
 
         print()
-        export_predict_house(y_predicted)
+        export_predict_house(y_predicted_mandatory)
     except Exception as e:
         print(f"Error handling: {str(e)}")
         return

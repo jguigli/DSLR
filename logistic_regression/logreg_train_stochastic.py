@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import time
-from utils import sigmoid_function, standard_scaler, load, export_thetas, ft_tqdm, plot_cost
+from utils import sigmoid_function, standard_scaler, load, export_thetas, ft_tqdm, plot_cost, init_parameters
 
 
 def gradient_descent(X, y):
@@ -18,7 +18,7 @@ def gradient_descent(X, y):
         # Mise a jour des etiquettes des donnees y correpondantes par 1 et 0 pour ceux qui ne sont pas concernees
         y_current = np.where(y == house, 1, 0)
         # Creation d'un vecteur parameter a l'echelle du nombres de colonnes des features
-        parameter = np.zeros(X.shape[1])
+        parameter = init_parameters(X)
         cost = []
         for _ in ft_tqdm(range(50000)):
             index = np.random.randint(m)

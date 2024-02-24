@@ -108,6 +108,23 @@ Accuracy score `98.75%` with drop features :
     Potions
     Care of Magical Creatures
 
+
+## Algortihm
+
+Batch Gradient Descent: 
+    
+    Parameters are updated after computing the gradient of the error with respect to the entire training set
+    => Smooth updates in the model parameters
+
+Stochastic Gradient Descent: 
+
+    Parameters are updated after computing the gradient of the error with respect to a single training example
+    => Very noisy updates in the parameters
+
+Mini-Batch Gradient Descent: 
+    
+    Parameters are updated after computing the gradient of  the error with respect to a subset of the training set
+    => Depending upon the batch size, the updates can be made less noisy – greater the batch size less noisy is the update
 ## REMINDER
 
 OK :
@@ -125,7 +142,7 @@ OK :
 - Faire les bonus
 - Rajouter le temps d'execution pour chaque algo dans le train
 - Rajouter l'erreur moyenne
-
-KO :
 - Describe.py -> Diff sur std
 - Rajouter de la vision sur le plot du cost
+
+KO :

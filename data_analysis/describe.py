@@ -40,7 +40,7 @@ def calcul_fields(numerical_data) -> pd.DataFrame():
     """"""
     try:
         i = 0
-        describe_dataframe = pd.DataFrame(index=['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'])
+        describe_dataframe = pd.DataFrame(index=['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max', 'median', 'nan'])
 
         for key, value in numerical_data.items():
             value_zero_nan = value.dropna()
@@ -48,22 +48,22 @@ def calcul_fields(numerical_data) -> pd.DataFrame():
 
             mean = np.sum(value_zero_nan) / count
 
-            s_diff = [(element - mean) ** 2 for element in value_zero_nan]
-            var = sum(s_diff) / count
-            std = var ** 0.5
 
-            mini = min(value_zero_nan)
+            deviation = np.abs(value_zero_nan - mean) ** 2
+            variance = sum(deviation) / (len(value_zero_nan) - 1)
+            std = np.sqrt(variance)
 
             quartile1 = quantile(value_zero_nan, 0.25)
             quartile2 = quantile(value_zero_nan, 0.5)
             quartile3 = quantile(value_zero_nan, 0.75)
-
+            mini = min(value_zero_nan)
             maxi = max(value_zero_nan)
 
             median = sorted(value_zero_nan)[count // 2]
+            nan = len(value) - count
 
             # Rajouter files bonus : var, median, ...
-            fields = [count, mean, std, mini, quartile1, quartile2, quartile3, maxi]
+            fields = [count, mean, std, mini, quartile1, quartile2, quartile3, maxi, median, nan]
             fields_formatted = [f'{name:.6f}' for name in fields]
 
             describe_dataframe.insert(i, key, fields_formatted)

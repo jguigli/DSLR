@@ -72,3 +72,6 @@ def ft_tqdm(lst: range) -> None:
         print(f"\r{output_str}", end="", flush=True)
         yield item
     print()
+
+def init_parameters(X):
+    return np.random.randn(X.shape[1]) * 0.01
