@@ -59,7 +59,7 @@ def predict():
                 y_predicted_mandatory = y_predicted
             accuracy = accuracy_score(y_truth, y_predicted)
             error = sum(y_predicted != y_truth)
-            print(f"- {type} Gradient Descent algorithm : {(100 * accuracy):.2f}% ({error} error(s) out of {len(y_truth)} instances))")
+            print(f"- {type} Gradient Descent algorithm : {(100 * accuracy):.2f}% ({error} error(s) out of {len(y_truth)} instances)")
 
         # Dataset de train pour creation de dataset test aleatoire avec train_test_split
         data = load("../data_sets/dataset_train.csv")
