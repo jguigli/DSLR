@@ -80,8 +80,10 @@ def describe():
         for name, column in data.items():
             if (column.dtypes == 'float64' or column.dtypes == 'int64'):
                 numerical_data[name] = column
+        print("DataFrame.describe() :")
         print(data.describe())
         describe = calcul_fields(numerical_data)
+        print("\nFt_describe() :")
         print(describe)
     except Exception as e:
         print(f"Error handling: {str(e)}")
