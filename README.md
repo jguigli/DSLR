@@ -125,24 +125,22 @@ Mini-Batch Gradient Descent:
     
     Parameters are updated after computing the gradient of  the error with respect to a subset of the training set
     => Depending upon the batch size, the updates can be made less noisy – greater the batch size less noisy is the update
-## REMINDER
 
-OK :
-- Valeur pas tout a fait egal pour describe.py
-- Faire la partie prediction
-- Exporter les parameters dans un csv
-- Describe.py -> rajouter .dropna() ?
-- Valeur NaN remove, ca pose probleme pour le bon nombre de lignes predites dans train et/ou predict (rajout de fillna(0))
-- Premiere ligne en trop dans house.csv
-- Exposer les bonnes features pour la logreg
-- Voir ce que je fais avec la fonction compare_thetas()
-- Tester le performance du modele
-- Rajouter la fonction de cout et la plot
-- Scatter_plot.py -> Rajouter les 4 maisons dans le scatter plot avec les couleurs
-- Faire les bonus
-- Rajouter le temps d'execution pour chaque algo dans le train
-- Rajouter l'erreur moyenne
-- Describe.py -> Diff sur std
-- Rajouter de la vision sur le plot du cost
+## Bonus fields for describe.py
 
-KO :
+Mode:
+
+    The mode is the value that appears most frequently in the dataset.
+
+Skewness : 
+
+    Skewness measures the asymmetry of the data distribution relative to the mean. It can be helpful in identifying asymmetric distributions
+    => positive = more high values than low values relative to the mean
+    => negative = more low values than high values relative to the mean
+
+Kurtosis : 
+
+    Kurtosis measures the shape of the data distribution relative to the normal distribution. It can reveal heavy or light tails compared to the normal distribution
+    => positive (>3) = the distribution has thicker tails (more extreme values) and a sharper peak than the normal distribution
+    => negative (<3) = the distribution has thinner tails (fewer extreme values) and a less sharp peak than the normal distribution
+    => neutral (=3) = corresponds to a normal distribution

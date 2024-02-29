@@ -8,21 +8,43 @@ def load(path: str) -> pd.DataFrame:
     df = pd.read_csv(path)
     return df
 
-def max(data):
+def ft_mode(data):
+    counts = {}
+    for value in data:
+        counts[value] = counts.get(value, 0) + 1
+    max_count = max(counts.values())
+    mode = [key for key, count in counts.items() if count == max_count]
+    return mode[0]
+
+def ft_skewness(data):
+    n = len(data)
+    mean = sum(data) / n
+    numerator = sum((x - mean) ** 3 for x in data)
+    denominator = (sum((x - mean) ** 2 for x in data) / n) ** (3/2)
+    return numerator / denominator
+
+def ft_kurtosis(data):
+    n = len(data)
+    mean = sum(data) / n
+    numerator = sum((x - mean) ** 4 for x in data)
+    denominator = (sum((x - mean) ** 2 for x in data) / n) ** 2
+    return (numerator / denominator) - 3
+
+def ft_max(data):
     max = data[0]
     for value in data:
         if value > max:
             max = value
     return max
 
-def min(data):
+def ft_min(data):
     min = data[0]
     for value in data:
         if value < min:
             min = value
     return min
 
-def quantile(data, p):
+def ft_quantile(data, p):
     data = sorted(data)
     position = (len(data) - 1) * p
     floor = np.floor(position)
@@ -40,7 +62,7 @@ def calcul_fields(numerical_data) -> pd.DataFrame():
     """"""
     try:
         i = 0
-        describe_dataframe = pd.DataFrame(index=['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max', 'median', 'nan'])
+        describe_dataframe = pd.DataFrame(index=['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max', 'nan', 'mode', 'skewness', 'kurtosis'])
 
         for key, value in numerical_data.items():
             value_zero_nan = value.dropna()
@@ -53,17 +75,19 @@ def calcul_fields(numerical_data) -> pd.DataFrame():
             variance = sum(deviation) / (len(value_zero_nan) - 1)
             std = np.sqrt(variance)
 
-            quartile1 = quantile(value_zero_nan, 0.25)
-            quartile2 = quantile(value_zero_nan, 0.5)
-            quartile3 = quantile(value_zero_nan, 0.75)
-            mini = min(value_zero_nan)
-            maxi = max(value_zero_nan)
+            quartile1 = ft_quantile(value_zero_nan, 0.25)
+            quartile2 = ft_quantile(value_zero_nan, 0.5)
+            quartile3 = ft_quantile(value_zero_nan, 0.75)
+            mini = ft_min(value_zero_nan)
+            maxi = ft_max(value_zero_nan)
 
-            median = sorted(value_zero_nan)[count // 2]
             nan = len(value) - count
+            mode = ft_mode(value_zero_nan)
+            skewness = ft_skewness(value_zero_nan)
+            kurtosis = ft_kurtosis(value_zero_nan)
 
             # Rajouter files bonus : var, median, ...
-            fields = [count, mean, std, mini, quartile1, quartile2, quartile3, maxi, median, nan]
+            fields = [count, mean, std, mini, quartile1, quartile2, quartile3, maxi, nan, mode, skewness, kurtosis]
             fields_formatted = [f'{name:.6f}' for name in fields]
 
             describe_dataframe.insert(i, key, fields_formatted)
