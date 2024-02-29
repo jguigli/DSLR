@@ -104,7 +104,7 @@ def predict():
         total_error = 0
         for i in range(10):
             X_train, X_test, y_train, y_test = train_test_split(X_data,y_data,test_size = 0.25)
-            y_predicted = sorting_hat(X_test, parameters_batch)
+            y_predicted = sorting_hat(X_test, parameters_minibatch)
             accuracy = accuracy_score(y_test, y_predicted)
             error = sum(y_predicted != y_test)
             total_error += error
