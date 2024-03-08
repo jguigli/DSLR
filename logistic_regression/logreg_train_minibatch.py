@@ -1,5 +1,3 @@
-import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 import time
 from utils import sigmoid_function, standard_scaler, load, export_thetas, ft_tqdm, plot_cost, init_parameters
@@ -19,7 +17,7 @@ def gradient_descent(X, y):
         parameter = init_parameters(X)
         cost = []
         for _ in ft_tqdm(range(50000)):
-            batch_indices = np.random.choice(len(X), size=30, replace=False)
+            batch_indices = np.random.choice(len(X), size=32, replace=False)
             X_batch = X[batch_indices]
             y_batch = y_current[batch_indices]
 

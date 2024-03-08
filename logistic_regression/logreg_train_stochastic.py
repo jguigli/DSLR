@@ -1,5 +1,3 @@
-import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 import time
 from utils import sigmoid_function, standard_scaler, load, export_thetas, ft_tqdm, plot_cost, init_parameters

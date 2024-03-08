@@ -10,6 +10,7 @@ Useful links :
 [Tutorial Logistic Regression OnevsAll](https://medium.com/analytics-vidhya/logistic-regression-from-scratch-multi-classification-with-onevsall-d5c2acf0c37c)  
 [Feature Importance for Logistic Regression](https://forecastegy.com/posts/feature-importance-in-logistic-regression/)  
 [Pairplot Interpretation](https://medium.com/analytics-vidhya/pairplot-visualization-16325cd725e6)  
+[Explication kurtosis](https://towardsdatascience.com/kurtosis-how-to-how-to-explain-to-a-10-year-old-a3224e615860)  
 
 Links for bonus :  
 [Wiki stochastic gradient descent](https://fr.wikipedia.org/wiki/Algorithme_du_gradient_stochastique)  
