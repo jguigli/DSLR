@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from utils import sigmoid_function, export_predict_house, load, standard_scaler
+from .utils import sigmoid_function, export_predict_house, load, standard_scaler
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
@@ -25,14 +25,14 @@ def predict():
         print("==> Sorting hat program <==\n")
 
         all_parameters = []
-        parameters_batch = load("../data_sets/parameters_batch.csv")
-        parameters_stochastic = load("../data_sets/parameters_stochastic.csv")
-        parameters_minibatch = load("../data_sets/parameters_minibatch.csv")
+        parameters_batch = load("./datasets/parameters_batch.csv")
+        parameters_stochastic = load("./datasets/parameters_stochastic.csv")
+        parameters_minibatch = load("./datasets/parameters_minibatch.csv")
         all_parameters.append((parameters_batch, "Batch"))
         all_parameters.append((parameters_stochastic, "Stochastic"))
         all_parameters.append((parameters_minibatch, "Mini Batch"))
 
-        data = load("../data_sets/dataset_test.csv")
+        data = load("./datasets/dataset_test.csv")
         X = data.drop(['Index',
                        'Hogwarts House',
                        'First Name',
@@ -48,7 +48,7 @@ def predict():
         X = standard_scaler(X)
         
         # Dataset contenant les instances corrects du dataset de test
-        data_truth = load("../data_sets/dataset_truth.csv")
+        data_truth = load("./datasets/dataset_truth.csv")
         y_truth = data_truth['Hogwarts House'].values
 
         # Affichage des scores de precisions des modeles en fonction de l'algortihme avec le dataset de test donnee
@@ -62,7 +62,7 @@ def predict():
             print(f"- {type} Gradient Descent algorithm : {(100 * accuracy):.2f}% ({error} error(s) out of {len(y_truth)} instances)")
 
         # Dataset de train pour creation de dataset test aleatoire avec train_test_split
-        data = load("../data_sets/dataset_train.csv")
+        data = load("./datasets/dataset_train.csv")
         y_data = data['Hogwarts House'].values
         X_data = data.drop(['Index',
                        'Hogwarts House',
