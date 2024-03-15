@@ -25,6 +25,8 @@ help:
 	@echo "  histogram:  run the histogram script need 1 argument ARG='dataset.csv'"
 	@echo "  scatter:    run the scatter plot script need 1 argument ARG='dataset.csv'"
 	@echo "  pair:       run the pair plot script need 1 argument ARG='dataset.csv'"
+	@echo "	 train:      run the training program need 1 argument ARG='dataset.csv'"
+	@echo "	 predict:    run the predict program"
 	@echo "  install:    Install the project"
 	@echo "  freeze:     Freeze the dependencies"
 	@echo "  fclean:     Remove the virtual environment and the datasets"
@@ -78,4 +80,4 @@ clean:
 
 re: fclean install
 
-phony: install freeze fclean clean re help describe histogram scatter pair
+phony: install freeze fclean clean re help describe histogram scatter pair train predict
