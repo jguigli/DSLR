@@ -23,13 +23,13 @@ def export_thetas(parameters, str):
     for values, house in parameters:
         thetas_dict[house] = values
     df = pd.DataFrame(thetas_dict)
-    df.to_csv(f"../data_sets/parameters_{str}.csv", index=False)
+    df.to_csv(f"datasets/parameters_{str}.csv", index=False)
     print(f"Exporting file : parameters has been saved to ./data_sets/parameters_{str}.csv")
 
 def export_predict_house(class_predicted):
     df = pd.DataFrame(class_predicted, columns=['Hogwarts House'])
-    df.to_csv("../data_sets/houses.csv", index_label='Index')
-    print(f"Exporting file : houses has been saved to ./data_sets/houses.csv")
+    df.to_csv("data_sets/houses.csv", index_label='Index')
+    print(f"Exporting file : houses has been saved to datasets/houses.csv")
     return
 
 def plot_cost(costs):
